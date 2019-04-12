@@ -24,5 +24,6 @@ new Vue({
 
   created() {
     //load book
+    this.$store.dispatch('LOAD_BOOKS')
   }
 }).$mount('#app')
