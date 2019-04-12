@@ -13,7 +13,7 @@ export default {
         }
     },
     actions: {
-        LOAD_BOOK({commit}) {
+        LOAD_BOOKS({commit}) {
             Vue.$db.collection('books')
             .get()
             .then(querySnapshot => {
@@ -32,9 +32,9 @@ export default {
                     }
                     books.push(book)
                 });
-                commit('SET_BOOKS')
+                commit('SET_BOOKS', books)
             })
             .catch(error => console.log(error))
-        }
-    }
+        }                                                    
+    },
 }
