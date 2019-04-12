@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid grid-list-md>
+    <v-container grid-list-xl>
         <v-layout row wrap>
             <!-- Search start -->
             <v-flex  xs12 sm10 md8 offset-sm1 offset-md2>
