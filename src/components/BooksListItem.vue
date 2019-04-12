@@ -1,13 +1,13 @@
 <template>
     <v-card class="book">
-        <v-container fluid>
+        <v-container>
             <!-- Content for big screen start-->
             <v-layout column class="hidden-sm-and-down">
-                <v-flex xs4 md1>
+                <v-flex xs4 md7 offset-md1>
                     <v-img :src= 'book.imageUrl' class="book__image">
                     </v-img>   
                 </v-flex>
-                <v-flex xs8 md9>
+                <v-flex xs4 md7 offset-md1>
                     <v-card-title>
                         <div>
                             <div class="headline">
@@ -19,15 +19,20 @@
                              <div class="headline" mt-3>
                                 Цена: {{book.cost}} руб.
                             </div>
+                            <div>
+                                <v-rating v-model="book.rating" color="yellow" readonly dense half-increments></v-rating>
+                                <div class="ml-1">
+                                    <span>{{ book.rating }}</span>
+                                </div>
+                            </div>
                         </div>
                     </v-card-title>
                     <v-card-actions>
-                        <v-rating v-model="book.rating" color="yellow" readonly dense half-increments></v-rating>
-                        <div class="ml-1">
-                            <span>{{ book.rating }}</span>
-                        </div>
-                        <v-spacer></v-spacer>
-                        <v-btn flat class="white" :to="{name: 'book', params:{id: book.id}}">ПОДРОБНЕЕ...</v-btn>  
+                        <v-btn flat class="white" :to="{name: 'book', params:{id: book.id}}">ПОДРОБНЕЕ...</v-btn>
+
+                         <v-spacer></v-spacer>
+
+                         <v-btn flat class="yellow">КУПИТЬ</v-btn>
                     </v-card-actions>
                 </v-flex>
             </v-layout>
@@ -87,6 +92,6 @@ export default {
 
 <style scoped>
 .book__image{
-    width: 30%;    
+    width: 90%;    
 }
 </style>
