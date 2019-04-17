@@ -100,14 +100,12 @@ export default {
     margin: 10px auto;
 }
 .cart__shopping_list{
-    position: absolute;
-    top: 0;
     overflow: auto;
 }
 .cart__subtotal{
     width: 100%;
-    /* position: absolute;
-    bottom: 0; */
+    position: absolute;
+    bottom: 0;
 }
 .cart__total_text{
     font-size: 1.25em;
