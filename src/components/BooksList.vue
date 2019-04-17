@@ -5,7 +5,24 @@
             <v-flex  xs12 sm10 md8 offset-sm1 offset-md2>
                 <v-container fluid>
                     <v-layout row>
-                        <v-flex>
+                        <v-flex xs12 md3>
+                            <v-select
+                            class="book__genre" 
+                            label="genre" 
+                            v-model="genre" 
+                            multiple 
+                            item-text="name" 
+                            item-value="value" 
+                            :items="genres">
+                            </v-select>
+                        </v-flex>
+                        <v-flex xs12 md3>
+                            <v-select label="Order by"
+                            v-model="order"
+                            :items="orderBy"
+                            @input="sortCost($event)"></v-select>
+                        </v-flex>
+                        <v-flex xs12 md6>
                             <v-text-field label="Search" v-model="searchTerm"></v-text-field>
                         </v-flex>
                     </v-layout>
@@ -14,10 +31,6 @@
             <!-- Search end -->
 
             <!-- content start -->
-            <!-- <v-flex row xs12 sm10 md2 offset-sm1 offset-md5>
-                <v-flex> <div class="subheading" mb-3>Всего {{books.length}} книг</div></v-flex>
-            </v-flex> -->
-
             <v-flex v-for="book in filrteredBooks" :key="book.id" xs12 sm10 md3 offset-sm1 offset-md1>
                 <Book :book="book"/>
             </v-flex>
@@ -37,7 +50,17 @@ export default {
     },
     data() {
         return {
-            searchTerm: null
+            searchTerm: null,
+            genre: [],
+            genres: [
+                {name: 'Фантастика', value: 'Фантастика'},
+                {name: 'Роман', value: 'Роман'},
+                {name: 'Детектив', value: 'Детектив'},
+                {name: 'Ужасы', value: 'Ужасы'},
+                {name:'Приключения', value: 'Приключения'}
+                ],
+            order: null,
+            orderBy: ['Lowest', 'Highest']                
         }
     },
     computed: {
@@ -49,7 +72,27 @@ export default {
             if (this.searchTerm) {
                 books = books.filter(book => book.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >= 0) 
             }
+
+            if(this.genre.length){
+                books = books.filter(book => this.genre.filter(val => book.genre.indexOf(val) !== -1).length > 0)
+            } 
+
             return books;
+        }
+    },
+    methods: {
+        sortCost(event) {
+            this.order = event
+            if (this.order === 'Lowest') {
+                this.books.sort(function(a,b) {
+                    return a.cost-b.cost
+                })
+            }
+            else {
+                this.books.sort(function(a,b) {
+                    return b.cost-a.cost
+                })
+            }
         }
     }
 }
