@@ -25,5 +25,8 @@ new Vue({
   created() {
     //load book
     this.$store.dispatch('LOAD_BOOKS')
+
+    // clear cart
+    this.$store.dispatch('LOAD_CART')
   }
 }).$mount('#app')
